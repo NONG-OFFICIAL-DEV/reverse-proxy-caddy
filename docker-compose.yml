@@ -15,6 +15,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./sites:/etc/caddy/sites
       - /home/ubuntu/personal-website/dist:/usr/share/caddy
+      - ./inventory-frontend/dist:/var/www/html/public:ro
       - caddy_data:/data
       - caddy_config:/config
     networks:

@@ -44,30 +44,3 @@ inventory.nongofficial.store {
     tls phloeutnong@gmail.com
 }
 
-inventory.nongofficial.store {
-    root * /var/www/html/public
-
-    # PHP API
-    handle_path /api/* {
-        php_fastcgi backend:9002
-    }
-
-    # AI API
-    handle /ai/api/* {
-        reverse_proxy ai:8080
-    }
-
-    # SPA frontend
-    handle {
-        file_server
-        try_files {path} {path}/ /index.html
-    }
-
-    log {
-        output file /var/log/caddy/inventory-access.log
-        format json
-    }
-
-    tls phloeutnong@gmail.com
-}
-

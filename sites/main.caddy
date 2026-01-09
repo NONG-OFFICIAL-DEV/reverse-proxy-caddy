@@ -26,17 +26,16 @@ www.nongofficial.store {
 }
 
 inventory.nongofficial.store {
-    # Backend API
-    handle /api/* {
-        reverse_proxy backend:9002
+    root * /var/www/html/public
+
+    handle /api* {
+        php_fastcgi backend:9002
     }
 
-    # AI API
-    handle /ai/api/* {
+    handle /ai/api* {
         reverse_proxy ai:8080
     }
 
-    # Frontend SPA
     handle {
         reverse_proxy frontend:80
     }
@@ -46,5 +45,5 @@ inventory.nongofficial.store {
         format json
     }
 
-    tls you@example.com  # Replace with your email
+    tls phloeutnong@gmail.com
 }

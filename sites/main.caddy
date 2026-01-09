@@ -1,0 +1,15 @@
+nongofficial.store {
+    reverse_proxy personal-website:3000
+}
+
+inventory.nongofficial.store {
+    reverse_proxy inventory-frontend:5173
+}
+
+api.inventory.nongofficial.store {
+    reverse_proxy inventory-backend:9000
+}
+
+ai.inventory.nongofficial.store {
+    reverse_proxy inventory-ai:8080
+}

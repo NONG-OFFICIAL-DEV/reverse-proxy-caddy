@@ -6,16 +6,8 @@ www.nongofficial.store {
         reverse_proxy website_api:9090
     }
 
-    # Everything else goes to frontend SPA
-    handle {
+    handle /* {
         reverse_proxy frontend_website:80
-    }
-
-    # Handle frontend SPA
-    handle {
-        root * /usr/share/caddy
-        file_server
-        try_files {path} {path}/ /index.html
     }
 
     # Logging

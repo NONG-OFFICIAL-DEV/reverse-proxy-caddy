@@ -5,6 +5,11 @@ www.nongofficial.store {
     handle /api/* {
         reverse_proxy website_api:9090
     }
+    
+    # Everything else goes to frontend SPA
+    handle {
+        reverse_proxy frontend_website:80
+    }
 
     # Handle frontend SPA
     handle {

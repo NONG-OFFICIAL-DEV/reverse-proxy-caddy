@@ -1,11 +1,12 @@
 networks:
   web:
+    name: web
     external: true
 
 services:
-  caddy:
+  global-proxy:
     image: caddy:2
-    container_name: caddy
+    container_name: global-proxy
     restart: unless-stopped
     ports:
       - "80:80"

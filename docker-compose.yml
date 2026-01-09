@@ -13,6 +13,7 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./sites:/etc/caddy/sites
+      - /home/ubuntu/personal-website/dist:/usr/share/caddy
       - caddy_data:/data
       - caddy_config:/config
     networks:

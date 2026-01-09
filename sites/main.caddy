@@ -5,7 +5,7 @@ www.nongofficial.store {
     handle /api/* {
         reverse_proxy website_api:9090
     }
-    
+
     # Everything else goes to frontend SPA
     handle {
         reverse_proxy frontend_website:80
@@ -26,13 +26,25 @@ www.nongofficial.store {
 }
 
 inventory.nongofficial.store {
-    reverse_proxy inventory-frontend:5173
-}
+    # Backend API
+    handle /api/* {
+        reverse_proxy backend:9002
+    }
 
-api.inventory.nongofficial.store {
-    reverse_proxy inventory-backend:9000
-}
+    # AI API
+    handle /ai/api/* {
+        reverse_proxy ai:8080
+    }
 
-ai.inventory.nongofficial.store {
-    reverse_proxy inventory-ai:8080
+    # Frontend SPA
+    handle {
+        reverse_proxy frontend:80
+    }
+
+    log {
+        output file /var/log/caddy/inventory-access.log
+        format json
+    }
+
+    tls you@example.com  # Replace with your email
 }

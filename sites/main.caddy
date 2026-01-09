@@ -1,5 +1,23 @@
-nongofficial.store {
-    reverse_proxy personal-website:3000
+www.nongofficial.store {
+    encode gzip
+
+    # Handle API requests first
+    handle /api/* {
+        reverse_proxy website_api:9090
+    }
+
+    # Handle frontend SPA
+    handle {
+        root * /usr/share/caddy
+        file_server
+        try_files {path} {path}/ /index.html
+    }
+
+    # Logging
+    log {
+        output file /var/log/caddy/www-nongofficial.log
+        format json
+    }
 }
 
 inventory.nongofficial.store {

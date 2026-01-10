@@ -32,9 +32,10 @@ inventory.nongofficial.store {
     }
 
     handle {
+        reverse_proxy frontend:80
         file_server
         try_files {path} {path}/ /index.html
     }
-
+    
     tls internal
 }

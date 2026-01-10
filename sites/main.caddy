@@ -23,8 +23,9 @@ inventory.nongofficial.store {
 
     # ---- Laravel API ----
     handle /api/* {
-        # Use php_fastcgi instead of reverse_proxy
-        php_fastcgi backend:9000
+        php_fastcgi backend:9000 {
+            root /var/www/html/public
+        }
     }
 
     # ---- AI API ----

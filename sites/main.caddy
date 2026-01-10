@@ -36,6 +36,6 @@ inventory.nongofficial.store {
         file_server
         try_files {path} {path}/ /index.html
     }
-    
-    tls internal
+
+   tls phloeutnong@gmail.com
 }

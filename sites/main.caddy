@@ -19,10 +19,9 @@ www.nongofficial.store {
 
 inventory.nongofficial.store {
     encode gzip
+    root * /var/www/html/public
 
     handle /api/* {
-        # 'root' here tells php_fastcgi where the files are INSIDE the backend container
-        root * /var/www/html/public
         php_fastcgi backend:9000
     }
 

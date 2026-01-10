@@ -18,6 +18,7 @@ www.nongofficial.store {
 }
 
 inventory.nongofficial.store {
+    encode gzip
 
     # ---- Laravel API ----
     handle /api/* {

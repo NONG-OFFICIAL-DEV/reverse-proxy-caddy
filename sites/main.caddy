@@ -18,10 +18,10 @@ www.nongofficial.store {
 }
 
 inventory.nongofficial.store {
-    encode gzip
     root * /var/www/html/public
+    encode gzip
 
-    # Laravel API (keep /api)
+    # Laravel API — keep /api intact
     handle /api/* {
         php_fastcgi backend:9000
     }

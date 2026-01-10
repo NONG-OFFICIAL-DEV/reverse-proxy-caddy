@@ -15,7 +15,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./sites:/etc/caddy/sites
       - /home/ubuntu/personal-website/dist:/usr/share/caddy
-      - ./backend/public:/var/www/html/public
+      - backend_code:/var/www/html
       - caddy_data:/data
       - caddy_config:/config
     networks:
@@ -24,3 +24,6 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+  # Define this to sync with your inventory-backend
+  backend_code:
+    external: true

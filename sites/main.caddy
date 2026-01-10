@@ -19,10 +19,11 @@ www.nongofficial.store {
 
 inventory.nongofficial.store {
     root * /var/www/html/public
+    encode gzip
 
-    # PHP API
+    # Laravel API
     handle /api/* {
-        php_fastcgi backend:9002
+        php_fastcgi backend:9000
     }
 
     # AI API
@@ -41,5 +42,6 @@ inventory.nongofficial.store {
         format json
     }
 
+    # TLS (Let’s Encrypt)
     tls phloeutnong@gmail.com
 }

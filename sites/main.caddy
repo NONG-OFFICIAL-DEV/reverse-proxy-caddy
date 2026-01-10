@@ -22,7 +22,7 @@ inventory.nongofficial.store {
 
     # ---- Laravel API ----
     handle /api/* {
-        reverse_proxy inventory-backend-1:9000
+        reverse_proxy backend:9000
     }
 
     # ---- AI API ----

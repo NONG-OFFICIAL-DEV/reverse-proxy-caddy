@@ -19,10 +19,12 @@ www.nongofficial.store {
 
 inventory.nongofficial.store {
     encode gzip
+    root * /var/www/html/public 
 
     # ---- Laravel API ----
     handle /api/* {
-        reverse_proxy backend:9000
+        # Use php_fastcgi instead of reverse_proxy
+        php_fastcgi backend:9000
     }
 
     # ---- AI API ----

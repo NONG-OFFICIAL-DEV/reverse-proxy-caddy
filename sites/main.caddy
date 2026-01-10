@@ -19,11 +19,10 @@ www.nongofficial.store {
 
 inventory.nongofficial.store {
     root * /var/www/html/public
-    encode gzip
 
-    # Laravel API — keep /api intact
+    # PHP API
     handle /api/* {
-        php_fastcgi backend:9000
+        php_fastcgi backend:9002
     }
 
     # AI API
@@ -31,12 +30,11 @@ inventory.nongofficial.store {
         reverse_proxy ai:8080
     }
 
-    # Frontend SPA
+    # SPA frontend (catch-all)
     handle {
-        reverse_proxy frontend:80
+        file_server
+        try_files {path} {path}/ /index.html
     }
-
-    file_server
 
     log {
         output file /var/log/caddy/inventory-access.log

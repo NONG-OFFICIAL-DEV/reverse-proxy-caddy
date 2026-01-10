@@ -21,9 +21,7 @@ inventory.nongofficial.store {
 
     # ---- Laravel API ----
     handle_path /api/* {
-        root * /var/www/html/public
-        php_fastcgi backend:9002
-        file_server
+        reverse_proxy backend-caddy:80
     }
 
     # ---- AI API ----

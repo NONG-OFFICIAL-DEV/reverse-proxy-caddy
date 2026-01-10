@@ -18,22 +18,20 @@ www.nongofficial.store {
 }
 
 inventory.nongofficial.store {
-    root * /var/www/html/public
 
-    # PHP API
+    # API
     handle /api/* {
         php_fastcgi backend:9002
     }
 
-    # AI API
+    # AI
     handle /ai/api/* {
         reverse_proxy ai:8080
     }
 
-    # SPA frontend (catch-all)
+    # Frontend SPA
     handle {
-        file_server
-        try_files {path} {path}/ /index.html
+        reverse_proxy frontend:80
     }
 
     log {

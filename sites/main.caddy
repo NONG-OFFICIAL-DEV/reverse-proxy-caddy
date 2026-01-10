@@ -20,12 +20,12 @@ www.nongofficial.store {
 inventory.nongofficial.store {
 
     # ---- Laravel API ----
-    handle_path /api/* {
+    handle /api/* {
         reverse_proxy backend-caddy:80
     }
 
     # ---- AI API ----
-    handle_path /ai/api/* {
+    handle /ai/api/* {
         reverse_proxy ai:8080
     }
 

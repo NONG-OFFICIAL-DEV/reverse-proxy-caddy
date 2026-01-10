@@ -19,9 +19,11 @@ www.nongofficial.store {
 
 inventory.nongofficial.store {
 
-    # API
+    # Laravel API
     handle /api/* {
-        php_fastcgi backend:9002
+        root * /var/www/html/public
+        php_fastcgi backend:9000
+        file_server
     }
 
     # AI

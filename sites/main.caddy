@@ -21,8 +21,10 @@ inventory.nongofficial.store {
     encode gzip
     root * /var/www/html/public
 
-    handle /api/* {
-        php_fastcgi backend:9000
+    # 2. Laravel Backend - Send to Nginx (webserver)
+    # We use /api* and any other backend routes you have
+    handle /api* {
+        reverse_proxy inventory_webserver:82
     }
 
     # AI API

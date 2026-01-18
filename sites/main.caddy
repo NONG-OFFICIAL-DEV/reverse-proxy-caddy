@@ -26,6 +26,11 @@ inventory.nongofficial.store {
     handle /api* {
         reverse_proxy inventory_webserver:82
     }
+    
+    # Route storage requests to Nginx (images)
+    handle /storage/* {
+        reverse_proxy inventory_webserver:82
+    }
 
     # AI API
     handle /ai/api/* {

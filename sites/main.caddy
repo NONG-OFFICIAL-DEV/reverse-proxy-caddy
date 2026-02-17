@@ -45,3 +45,17 @@ inventory.nongofficial.store {
 
    tls phloeutnong@gmail.com
 }
+
+menu.store1.nongofficial.store {
+    encode gzip
+
+    handle /* {
+        reverse_proxy mobile-menu-frontend:80
+    }
+
+    # Logging
+    log {
+        output file /var/log/caddy/www-nongofficial.log
+        format json
+    }
+}

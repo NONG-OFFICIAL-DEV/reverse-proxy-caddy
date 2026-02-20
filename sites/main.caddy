@@ -55,3 +55,15 @@ menu.store1.nongofficial.store {
         format json
     }
 }
+
+# beta version
+beta.nongofficial.store {
+    reverse_proxy mobile-menu-frontend-beta:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/beta.nongofficial.store.log
+        format json
+    }
+}

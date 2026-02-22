@@ -32,6 +32,11 @@ inventory.nongofficial.store {
         reverse_proxy inventory_webserver:82
     }
 
+    # Reverb WebSocket
+    handle /app* {
+        reverse_proxy app_backend:6001
+    }
+
     # AI API
     handle /ai/api/* {
         reverse_proxy ai:8080

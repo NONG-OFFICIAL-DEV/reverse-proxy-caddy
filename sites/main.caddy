@@ -31,9 +31,9 @@ inventory.nongofficial.store {
     handle /storage/* {
         reverse_proxy inventory_webserver:82
     }
-    
+
     # Laravel web routes (invoice, reports, etc.)
-    handle /sales/* {
+    handle /download/* {
         reverse_proxy inventory_webserver:82
     }
 

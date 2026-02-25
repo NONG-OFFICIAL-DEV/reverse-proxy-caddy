@@ -77,3 +77,27 @@ beta.nongofficial.store {
         format json
     }
 }
+
+# for coffee pos and restaurance
+coffee-pos.nongofficial.store {
+    reverse_proxy coffee-pos-frontend:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/coffee-pos.nongofficial.store.log
+        format json
+    }
+}
+
+# for mart store 
+retail.nongofficial.store {
+    reverse_proxy retail:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/retail.nongofficial.store.log
+        format json
+    }
+}

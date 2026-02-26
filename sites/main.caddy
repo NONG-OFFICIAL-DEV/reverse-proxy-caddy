@@ -92,7 +92,7 @@ coffee-pos.nongofficial.store {
 
 # for mart store 
 retail.nongofficial.store {
-    reverse_proxy retail:80
+    reverse_proxy retail-pos-frontend:80
     encode gzip
     
     # Logging

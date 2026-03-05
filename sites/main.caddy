@@ -101,3 +101,15 @@ retail.nongofficial.store {
         format json
     }
 }
+
+# for mart store 
+smart.store.nongofficial.store {
+    reverse_proxy smart_store_frontend:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/smart.store.nongofficial.store.log
+        format json
+    }
+}

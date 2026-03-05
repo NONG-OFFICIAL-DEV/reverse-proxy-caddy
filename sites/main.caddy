@@ -104,8 +104,23 @@ retail.nongofficial.store {
 
 # for mart store 
 smart.store.nongofficial.store {
-    reverse_proxy smart_store_frontend:80
     encode gzip
+    root * /var/www/html/public
+
+    # 2. Laravel Backend - Send to Nginx (webserver)
+    handle /api* {
+        reverse_proxy smart_store_webserver:84
+    }
+    
+    # Route storage requests to Nginx (images)
+    handle /storage/* {
+        reverse_proxy smart_store_webserver:84
+    }
+
+
+    handle {
+        reverse_proxy smart_store_frontend:80
+    }
     
     # Logging
     log {

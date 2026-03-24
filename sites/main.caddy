@@ -139,3 +139,14 @@ smartstore-landing.nongofficial.store {
         format json
     }
 }
+# for clinic website
+clinic.nongofficial.store {
+    reverse_proxy clinic-website:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/clinic-website.nongofficial.store.log
+        format json
+    }
+}

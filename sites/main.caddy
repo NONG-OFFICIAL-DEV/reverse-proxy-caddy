@@ -150,3 +150,15 @@ clinic.nongofficial.store {
         format json
     }
 }
+
+# for smartstore-landing
+www.nexstacktech.com {
+    reverse_proxy smart-store-website:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/retail.nongofficial.store.log
+        format json
+    }
+}

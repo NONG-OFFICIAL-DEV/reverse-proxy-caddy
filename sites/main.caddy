@@ -152,3 +152,25 @@ www.nexstacktech.com {
         format json
     }
 }
+
+pos-cafe.nexstacktech.com {
+    reverse_proxy coffee-pos-frontend:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/coffee-pos.nexstacktech.com.log
+        format json
+    }
+}
+
+pos-retail.nexstacktech.com {
+    reverse_proxy retail-pos-frontend:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/pos-retail.nexstacktech.com.log
+        format json
+    }
+}

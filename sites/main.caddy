@@ -141,6 +141,33 @@ www.nexstacktech.com {
     }
 }
 
+# for back office mangement
+admin.nexstacktech.com {
+    encode gzip
+    root * /var/www/html/public
+
+    # 2. Laravel Backend - Send to Nginx (webserver)
+    handle /api* {
+        reverse_proxy smart_store_webserver:84
+    }
+    
+    # Route storage requests to Nginx (images)
+    handle /storage/* {
+        reverse_proxy smart_store_webserver:84
+    }
+
+
+    handle {
+        reverse_proxy smart_store_frontend:80
+    }
+    
+    # Logging
+    log {
+        output file /var/log/caddy/smart.store.nongofficial.store.log
+        format json
+    }
+}
+
 pos-cafe.nexstacktech.com {
     reverse_proxy coffee-pos-frontend:80
     encode gzip

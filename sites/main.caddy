@@ -189,3 +189,15 @@ pos-retail.nexstacktech.com {
         format json
     }
 }
+
+# e-menu 
+e-menu.nexstacktech.com {
+    reverse_proxy mobile-menu-frontend-beta:80
+    encode gzip
+    
+    # Logging
+    log {
+        output file /var/log/caddy/beta.nongofficial.store.log
+        format json
+    }
+}

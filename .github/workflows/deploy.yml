@@ -33,21 +33,12 @@ jobs:
             set -e
             cd /home/ubuntu/reverse-proxy
 
-            # Kill any orphan caddy processes on host
+            # Kill orphan caddy processes
             sudo pkill -9 -f "caddy run" || true
             sleep 2
 
-            # Pull latest image
             docker pull caddy:2
-
-            # Stop and remove old containers + orphans
             docker compose down --remove-orphans || true
-
-            # Remove old unused images to free disk/RAM
             docker image prune -f
-
-            # Start fresh
             docker compose up -d
-
-            # Verify it's running
             docker compose ps

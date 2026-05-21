@@ -33,12 +33,11 @@ jobs:
             set -e
             cd /home/ubuntu/reverse-proxy
 
-            # Kill orphan caddy processes
-            sudo pkill -9 -f "caddy run" || true
-            sleep 2
+            # Free RAM before deploy
+            sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
+            docker image prune -f
 
+            # Deploy cleanly
             docker pull caddy:2
             docker compose down --remove-orphans || true
-            docker image prune -f
             docker compose up -d
-            docker compose ps

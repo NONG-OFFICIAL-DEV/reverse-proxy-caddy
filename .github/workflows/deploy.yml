@@ -33,11 +33,19 @@ jobs:
             set -e
             cd /home/ubuntu/reverse-proxy
 
-            # Free RAM before deploy
-            sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
             docker image prune -f
 
             # Deploy cleanly
             docker pull caddy:2
             docker compose down --remove-orphans || true
+
+            # A container can end up named "global-proxy" without being
+            # tracked under this compose project (e.g. started manually,
+            # or from before this project's name/target path settled) —
+            # `compose down` above can't find/remove it in that case, but
+            # `compose up` still collides on the literal container name.
+            # Remove it by name directly so redeploys are self-healing
+            # instead of failing on this same conflict every time.
+            docker rm -f global-proxy 2>/dev/null || true
+
             docker compose up -d

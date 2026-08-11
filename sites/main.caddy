@@ -190,14 +190,46 @@ pos-retail.nexstacktech.com {
     }
 }
 
-# e-menu 
+# e-menu
 e-menu.nexstacktech.com {
     reverse_proxy mobile-menu-frontend-beta:80
     encode gzip
-    
+
     # Logging
     log {
         output file /var/log/caddy/beta.nongofficial.store.log
+        format json
+    }
+}
+
+# for Photo Studio SaaS
+photo-studio.nexstacktech.com {
+    encode gzip
+
+    # Laravel backend API
+    handle /api* {
+        reverse_proxy photo_studio_webserver:80
+    }
+
+    # Uploaded files (storage:link'd public disk)
+    handle /storage/* {
+        reverse_proxy photo_studio_webserver:80
+    }
+
+    # Reverb WebSocket — client connections (/app/{key}) and server-side
+    # event publishing (/apps/{id}/events) both start with "/app".
+    handle /app* {
+        reverse_proxy photo_studio_reverb:8080
+    }
+
+    # Everything else -> the Vue SPA
+    handle {
+        reverse_proxy photo_studio_frontend:80
+    }
+
+    # Logging
+    log {
+        output file /var/log/caddy/photo-studio.nexstacktech.com.log
         format json
     }
 }

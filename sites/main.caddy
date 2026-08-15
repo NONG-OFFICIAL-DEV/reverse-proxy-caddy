@@ -144,26 +144,30 @@ www.nexstacktech.com {
 # for back office mangement
 admin.nexstacktech.com {
     encode gzip
-    root * /var/www/html/public
 
-    # 2. Laravel Backend - Send to Nginx (webserver)
+    # Laravel Backend - Nginx (also handles the /app Reverb websocket
+    # proxy internally, see backend/nginx/default.conf)
     handle /api* {
         reverse_proxy smart_store_webserver:84
     }
-    
+
     # Route storage requests to Nginx (images)
     handle /storage/* {
         reverse_proxy smart_store_webserver:84
     }
 
+    # Reverb WebSocket - client connections (/app/{key})
+    handle /app* {
+        reverse_proxy smart_store_webserver:84
+    }
 
     handle {
         reverse_proxy smart_store_frontend:80
     }
-    
+
     # Logging
     log {
-        output file /var/log/caddy/smart.store.nongofficial.store.log
+        output file /var/log/caddy/admin.nexstacktech.com.log
         format json
     }
 }

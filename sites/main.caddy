@@ -22,11 +22,11 @@ www.nexstacktech.com {
     encode gzip
 
     handle /api* {
-        reverse_proxy saas_website_backend:80
+        reverse_proxy saas_website_backend:86
     }
 
     handle /storage/* {
-        reverse_proxy saas_website_backend:80
+        reverse_proxy saas_website_backend:86
     }
 
     handle {

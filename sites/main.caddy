@@ -17,126 +17,25 @@ www.nongofficial.store {
     }
 }
 
-inventory.nongofficial.store {
-    encode gzip
-    root * /var/www/html/public
-
-    # 2. Laravel Backend - Send to Nginx (webserver)
-    # We use /api* and any other backend routes you have
-    handle /api* {
-        reverse_proxy inventory_webserver:82
-    }
-    
-    # Route storage requests to Nginx (images)
-    handle /storage/* {
-        reverse_proxy inventory_webserver:82
-    }
-
-    # Laravel web routes (invoice, reports, etc.)
-    handle /download/* {
-        reverse_proxy inventory_webserver:82
-    }
-
-    # Reverb WebSocket
-    handle /app* {
-        reverse_proxy app_backend:6001
-    }
-
-    # AI API
-    handle /ai/api/* {
-        reverse_proxy ai:8080
-    }
-
-    handle {
-        reverse_proxy inventory-frontend:80
-    }
-
-   tls phloeutnong@gmail.com
-}
-
-# Store 1
-menu.store1.nongofficial.store {
-    reverse_proxy mobile-menu-frontend:80
-    encode gzip
-    
-    # Logging
-    log {
-        output file /var/log/caddy/menu.store1.nongofficial.store.log
-        format json
-    }
-}
-
-# beta version
-beta.nongofficial.store {
-    reverse_proxy mobile-menu-frontend-beta:80
-    encode gzip
-    
-    # Logging
-    log {
-        output file /var/log/caddy/beta.nongofficial.store.log
-        format json
-    }
-}
-
-# for mart store 
-retail.nongofficial.store {
-    reverse_proxy retail-pos-frontend:80
-    encode gzip
-    
-    # Logging
-    log {
-        output file /var/log/caddy/retail.nongofficial.store.log
-        format json
-    }
-}
-
-# for mart store 
-smart.store.nongofficial.store {
-    encode gzip
-    root * /var/www/html/public
-
-    # 2. Laravel Backend - Send to Nginx (webserver)
-    handle /api* {
-        reverse_proxy smart_store_webserver:84
-    }
-    
-    # Route storage requests to Nginx (images)
-    handle /storage/* {
-        reverse_proxy smart_store_webserver:84
-    }
-
-
-    handle {
-        reverse_proxy smart_store_frontend:80
-    }
-    
-    # Logging
-    log {
-        output file /var/log/caddy/smart.store.nongofficial.store.log
-        format json
-    }
-}
-
-# for clinic website
-clinic.nongofficial.store {
-    reverse_proxy clinic-website:80
-    encode gzip
-    
-    # Logging
-    log {
-        output file /var/log/caddy/clinic-website.nongofficial.store.log
-        format json
-    }
-}
-
 # for smartstore-landing
 www.nexstacktech.com {
-    reverse_proxy smart-store-website:80
     encode gzip
-    
+
+    handle /api* {
+        reverse_proxy saas_website_backend:80
+    }
+
+    handle /storage/* {
+        reverse_proxy saas_website_backend:80
+    }
+
+    handle {
+        reverse_proxy smart-store-website:80
+    }
+
     # Logging
     log {
-        output file /var/log/caddy/retail.nongofficial.store.log
+        output file /var/log/caddy/www.nexstacktech.com.log
         format json
     }
 }
@@ -201,7 +100,7 @@ e-menu.nexstacktech.com {
 
     # Logging
     log {
-        output file /var/log/caddy/beta.nongofficial.store.log
+        output file /var/log/caddy/admin.nexstacktech.com.log
         format json
     }
 }
